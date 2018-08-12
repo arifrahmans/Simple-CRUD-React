@@ -57,7 +57,7 @@ class App extends Component {
                     <td>{t.description}</td>
                     <td>{t.carrotCount}</td>
                     <td>{t.status}</td>
-                    <td>{t.isDeleted}</td>
+                    <td>{t.isDeleted ? "True" : "False"}</td>
                     <td>{t.transactionTime}</td>
                   </tr>
                 )}
