@@ -14,7 +14,10 @@ const NavCarrot = () => {
                         <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/managerreward/list">Manage Reward</a>
+                        <a className="nav-link" href="/managerreward/list">Manager Reward</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/">Stockies Reward</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/list">Manage Transaction</a>

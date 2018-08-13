@@ -76,7 +76,8 @@ class Edit extends Component {
                   <input type="hidden" name="lastModifiedBy" value={this.state.reward.lastModifiedBy} />
                   <input type="hidden" name="deleted" value={this.state.reward.deleted} />
                 </div>
-                <button type="submit" className="btn btn-default">Update</button>
+                <button type="submit" className="btn btn-default">Update</button>&nbsp;
+                <Link to={`/managerreward/list`} className="btn btn-info">Back to Reward List</Link>
               </form>
             </div>
           </div>

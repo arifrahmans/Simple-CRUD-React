@@ -69,7 +69,8 @@ class Create extends Component {
                       <option value="Inactive">Inactive</option>
                     </select>
                   </div>
-                  <button type="submit" className="btn btn-default">Submit</button>
+                  <button type="submit" className="btn btn-default">Submit</button>&nbsp;
+                  <Link to={`/managerreward/list`} className="btn btn-info">Back to Reward List</Link>
                 </form>
               </div>
             </div>

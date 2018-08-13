@@ -22,10 +22,13 @@ class Show extends Component {
 
   delete(id){
     console.log(id);
-    axios.delete('http://localhost:8080/mitraiscarrot/reward/managerreward/'+id)
+    if (window.confirm('Are you sure you wish to delete this item?')){
+      axios.delete('http://localhost:8080/mitraiscarrot/reward/managerreward/'+id)
       .then((result) => {
         this.props.history.push("/managerreward/list")
       });
+    }
+    
   }
 
   render() {
@@ -49,7 +52,8 @@ class Show extends Component {
                 <dd>{this.state.reward.status}</dd>
               </dl>
               <Link to={`/managerreward/edit/${this.state.reward.id}`} className="btn btn-success">Edit</Link>&nbsp;
-            <button onClick={this.delete.bind(this, this.state.reward.id)} className="btn btn-danger">Delete</button>
+            <button onClick={this.delete.bind(this, this.state.reward.id)} className="btn btn-danger">Delete</button>&nbsp;
+            <Link to={`/managerreward/list`} className="btn btn-info">Back to Reward List</Link>
             </div>
           </div>
         </div>

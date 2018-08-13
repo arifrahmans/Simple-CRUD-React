@@ -33,15 +33,15 @@ class List extends Component {
             </h3>
           </div>
           <div className="panel-body">
-            <h4><Link to="/managerreward/create"><span className="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add Reward</Link></h4>
-            <table className="table table-bordered table-hover">
+            <Link to={`/managerreward/create`} className="btn btn-info new-space"><span className="glyphicon glyphicon-plus-sign"></span>Add Reward</Link>
+            <table className="table table-bordered table-hover new-space">
               <thead>
                 <tr>
                   <th>Id</th>
                   <th>Type Name</th>
                   <th>Carrot Count</th>
                   <th>Status</th>
-                  <th>is Deleted</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -51,7 +51,7 @@ class List extends Component {
                     <td>{t.typeName}</td>
                     <td>{t.carrot}</td>
                     <td>{t.status}</td>
-                    <td>{t.deleted === false ? 'False' : 'True'}</td>
+                    <td><Link to={`/managerreward/show/${t.id}`} className="btn btn-warning">Detail</Link></td>
                   </tr>
                 )}
               </tbody>
