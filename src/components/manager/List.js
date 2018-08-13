@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import NavCarrot from '../NavCarrot';
+import NavDesign from '../others/Header';
+import FooterDesign from '../others/Footer';
+import MainDesign from '../others/Main';
 
 class List extends Component {
   
@@ -23,8 +26,8 @@ class List extends Component {
   render() {
     return (
       <div>
-      <NavCarrot />
-
+      <NavDesign />
+      <MainDesign />
       <div className="container">
         <div className="panel panel-default">
           <div className="panel-heading">
@@ -59,6 +62,7 @@ class List extends Component {
           </div>
         </div>
       </div>
+      <FooterDesign />
       </div>
     );
   }

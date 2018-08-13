@@ -5,10 +5,6 @@ import '../node_modules/bootswatch/dist/pulse/bootstrap.min.css';
 import './components/themes/Custom.css';
 import App from './App';
 import './App.css';
-import Create from './components/Create';
-import Edit from './components/Edit';
-import Show from './components/Show';
-import List from './components/List';
 import ManagerRewardList from './components/manager/List';
 import ManagerRewardCreate from './components/manager/Create';
 import ManagerRewardEdit from './components/manager/Edit';
@@ -19,10 +15,6 @@ ReactDOM.render(
     <Router>
         <div>
         <Route exact path='/' component={App} />
-        <Route path='/list' component={List} />
-        <Route path='/edit/:id' component={Edit} />
-        <Route path='/create' component={Create} />
-        <Route path='/show/:id' component={Show} />
         <Route path='/managerreward/list' component={ManagerRewardList} />
         <Route path='/managerreward/edit/:id' component={ManagerRewardEdit} />
         <Route path='/managerreward/create' component={ManagerRewardCreate} />
