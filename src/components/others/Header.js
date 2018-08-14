@@ -3,6 +3,7 @@ import MitraisLogo from '../../assets/mitrais-logo.png';
 
 const Header = () => {
     return(
+        <header>
         <nav className="navbar navbar-expand-md navbar-light fixed-top bg-light">
             <a className="navbar-brand" href="#">
           <img src={MitraisLogo} alt="" />
@@ -26,6 +27,7 @@ const Header = () => {
                 </ul>
             </div>
         </nav>
+        </header>
     )
 }
 

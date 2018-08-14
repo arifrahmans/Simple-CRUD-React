@@ -9,6 +9,7 @@ import ManagerRewardList from './components/manager/List';
 import ManagerRewardCreate from './components/manager/Create';
 import ManagerRewardEdit from './components/manager/Edit';
 import ManagerRewardShow from './components/manager/Show';
+import ManagerRewardInactive from './components/manager/template/CloseReward';
 
 
 ReactDOM.render(
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route path='/managerreward/edit/:id' component={ManagerRewardEdit} />
         <Route path='/managerreward/create' component={ManagerRewardCreate} />
         <Route path='/managerreward/show/:id' component={ManagerRewardShow} />
+        <Route path='/managerreward/inactive/:id' component={ManagerRewardInactive} />
         </div>
     </Router>,
   document.getElementById('root')

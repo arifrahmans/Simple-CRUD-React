@@ -545,3 +545,7 @@ a:not([href]):not([tabindex]) {
     border: none;
     cursor: pointer;
 }
+
+.up-spacer {
+    margin-top: 40px;
+}

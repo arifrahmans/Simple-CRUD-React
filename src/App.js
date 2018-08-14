@@ -20,7 +20,6 @@ class App extends Component {
           <NavDesign />
           <MainDesign />
           <RoleDesign />
-
           <FooterDesign />
         </div>
         

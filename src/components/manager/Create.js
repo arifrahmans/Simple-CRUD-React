@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import NavCarrot from '../NavCarrot';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import moment from 'moment';
 
 class Create extends Component {
 
@@ -13,19 +16,27 @@ class Create extends Component {
       status: "Active",
       rewardTypeName: "Manager Reward",
       maxClaim: 0,
-      expiredDate: null,
+      expiredDate: moment(),
       createdBy: "Admin",
       lastModifiedBy: "Admin",
       deleted: false
     };
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(date) {
+    this.setState({
+      expiredDate: date
+    });
+  }
+
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
 
-  onSubmit = (e) => {
+  onSubmitNew = (e) => {
     e.preventDefault();
 
     const { typeName, carrot, status, rewardTypeName, maxClaim, expiredDate,
@@ -34,7 +45,7 @@ class Create extends Component {
     axios.post('http://localhost:8080/mitraiscarrot/reward/managerreward', { typeName, carrot, status, rewardTypeName, maxClaim, expiredDate,
     createdBy, lastModifiedBy,deleted })
       .then((result) => {
-        this.props.history.push("/managerreward/list")
+        window.location.reload();
       });
   }
 
@@ -42,18 +53,17 @@ class Create extends Component {
     const { typeName, carrot, status, rewardTypeName, maxClaim, expiredDate,
       createdBy, lastModifiedBy,deleted } = this.state;
     return (
-      <div>
-        <NavCarrot />
-        <div>
-          <div className="container">
-            <div className="panel panel-default">
-              <div className="panel-heading">
-                <h3 className="panel-title">
-                  Create New Reward
-            </h3>
-              </div>
-              <div className="panel-body">
-                <form onSubmit={this.onSubmit}>
+      <div className="modal fade" id="managerReward" tabindex="-1" role="dialog" aria-labelledby="managerReward" aria-hidden="true">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">Create New Reward</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+            <form onSubmit={this.onSubmitNew}>
                   <div className="form-group">
                     <label for="typeName">Type Name:</label>
                     <input type="text" className="form-control" name="typeName" value={typeName} onChange={this.onChange} placeholder="Type Name" />
@@ -69,15 +79,25 @@ class Create extends Component {
                       <option value="Inactive">Inactive</option>
                     </select>
                   </div>
-                  <button type="submit" className="btn btn-default">Submit</button>&nbsp;
-                  <Link to={`/managerreward/list`} className="btn btn-info">Back to Reward List</Link>
+                  <div className="form-group">
+                    <label for="expiredDate">Expired Date:</label>
+                    <DatePicker type="text" className="form-control" name="expiredDate" value={expiredDate} selected={this.state.expiredDate} onChange={this.handleChange} placeholder="Expired Date" />
+                  </div>
+                  <div className="form-group">
+                    <label for="maxClaim">Maximal Claim:</label>
+                    <input type="text" className="form-control" name="maxClaim" value={maxClaim} onChange={this.onChange} placeholder="Maximal Claim" />
+                  </div>
+                  
+                  <div className="modal-footer">
+                  <button type="button" className="btn  " data-dismiss="modal">Cancel</button>
+                  <button type="submit" className="btn btn-info">Submit</button>
+                  </div>
+                  
                 </form>
-              </div>
             </div>
           </div>
         </div>
-      </div>
-      
+      </div>   
     );
   }
 }

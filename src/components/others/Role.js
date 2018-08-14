@@ -15,8 +15,8 @@ const Role = () => {
                     <a href="index-employee.html" className="btn btn-carrot radius-5"> Employee</a>
                     <a href="index-manager.html" className="btn btn-carrot radius-5"> Manager</a>
                     <a href="index-merchant.html" className="btn btn-carrot radius-5"> Merchant</a>
-                    <a href="index-farmer.html" className="btn btn-carrot radius-5"> Farmer / Stockist</a>
-                    <a href="index-administrator.html" className="btn btn-carrot radius-5"> Administrator</a>
+                    <a href="/managerreward/list" className="btn btn-carrot radius-5"> Manager Reward</a>
+                    <a href="index-administrator.html" className="btn btn-carrot radius-5"> Stockist Reward</a>
                 </div>
 
         </div>

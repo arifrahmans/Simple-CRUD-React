@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import NavCarrot from '../NavCarrot';
+import NavDesign from '../others/Header';
+import FooterDesign from '../others/Footer';
+import MainDesign from '../others/Main';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import moment from 'moment';
 
 class Edit extends Component {
 
@@ -10,14 +16,22 @@ class Edit extends Component {
     this.state = {
       reward: {}
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     axios.get('http://localhost:8080/mitraiscarrot/reward/managerreward/'+this.props.match.params.id)
       .then(res => {
         this.setState({ reward: res.data });
+        res.data.expiredDate = moment(res.data.expiredDate,'YYYY-MM-DD');
         console.log(this.state.reward);
       });
+  }
+
+  handleChange(date) {
+    const state = this.state.reward
+    state["expiredDate"] = date;
+    this.setState({reward:state});
   }
 
   onChange = (e) => {
@@ -26,7 +40,7 @@ class Edit extends Component {
     this.setState({reward:state});
   }
 
-  onSubmit = (e) => {
+  onSubmitEdit = (e) => {
     e.preventDefault();
 
     const { typeName, carrot, status, rewardTypeName, maxClaim, expiredDate,
@@ -42,17 +56,24 @@ class Edit extends Component {
   render() {
     return (
       <div>
-        <NavCarrot />
+        <NavDesign />
+        <MainDesign />
 
-        <div className="container">
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">
-                Edit Reward - {this.state.reward.id}
-              </h3>
+        <main role="main" className="container mt-3 ">
+          <div className="row d-flex">
+            <div className="col-md-12">
+              <h2 className="mt-4 pl-0 text-grey ml-0"> Edit Reward - {this.state.reward.id}</h2>
             </div>
-            <div className="panel-body">
-              <form onSubmit={this.onSubmit}>
+            </div>
+
+        </main>
+
+        <section className="transaction-history my-4">
+          <div className="container search-box">
+
+            <div className="row">
+              <div className="col-md-12">
+              <form onSubmit={this.onSubmitEdit}>
                 <div className="form-group">
                   <label for="typeName">Type Name:</label>
                   <input type="text" className="form-control" name="typeName" value={this.state.reward.typeName} onChange={this.onChange} placeholder="Type Name" />
@@ -69,9 +90,15 @@ class Edit extends Component {
                   </select>
                 </div>
                 <div className="form-group">
+                    <label for="expiredDate">Expired Date:</label>
+                    <DatePicker type="text" className="form-control" name="expiredDate" value={this.state.reward.expiredDate} selected={this.state.reward.expiredDate} onChange={this.handleChange} placeholder="Expired Date" />
+                  </div>
+                  <div className="form-group">
+                    <label for="maxClaim">Maximal Claim:</label>
+                    <input type="text" className="form-control" name="maxClaim" value={this.state.reward.maxClaim} onChange={this.onChange} placeholder="Maximal Claim" />
+                  </div>
+                <div className="form-group">
                   <input type="hidden" name="rewardTypeName" value={this.state.reward.rewardTypeName} />
-                  <input type="hidden" name="maxClaim" value={this.state.reward.maxClaim} />
-                  <input type="hidden" name="expiredDate" value={this.state.reward.expiredDate} />
                   <input type="hidden" name="createdBy" value={this.state.reward.createdBy} />
                   <input type="hidden" name="lastModifiedBy" value={this.state.reward.lastModifiedBy} />
                   <input type="hidden" name="deleted" value={this.state.reward.deleted} />
@@ -82,6 +109,9 @@ class Edit extends Component {
             </div>
           </div>
         </div>
+        </section>
+        &nbsp;
+        <FooterDesign />
       </div>
       
     );
