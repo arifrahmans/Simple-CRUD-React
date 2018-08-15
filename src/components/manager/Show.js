@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import NavDesign from '../others/Header';
 import FooterDesign from '../others/Footer';
 import MainDesign from '../others/Main';
+import moment from 'moment';
 
 class Show extends Component {
 
@@ -72,7 +73,7 @@ class Show extends Component {
                   </div>
                   <div className="form-group">
                     <label for="expiredDate">Expired Date:</label>
-                    <input type="text" className="form-control" name="expiredDate" value={this.state.reward.expiredDate} />
+                    <input type="text" className="form-control" name="expiredDate" value={moment(this.state.reward.expiredDate).format('YYYY-MM-DD')} />
                   </div>
                   <Link to={`/managerreward/edit/${this.state.reward.id}`} className="btn btn-success">Edit</Link>&nbsp;
             <button onClick={this.delete.bind(this, this.state.reward.id)} className="btn btn-danger">Delete</button>&nbsp;

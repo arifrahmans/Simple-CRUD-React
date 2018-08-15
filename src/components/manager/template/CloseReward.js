@@ -3,6 +3,7 @@ import axios from 'axios';
 import NavDesign from '../../others/Header';
 import FooterDesign from '../../others/Footer';
 import MainDesign from '../../others/Main';
+import { Link } from 'react-router-dom';
 
 class CloseReward extends Component {
 
@@ -55,7 +56,7 @@ class CloseReward extends Component {
                     <label for="statusCloseReason">Closed Reason:</label>
                     <textarea type="text" className="form-control" name="statusCloseReason" onChange={this.onChange} placeholder="Closed Reason" />
                   </div>
-                  <button type="button" className="btn  " data-dismiss="modal">Cancel</button>
+                  <Link to={`/managerreward/list`} className="btn btn-default">Cancel</Link>
                   <button type="submit" className="btn btn-info">Submit</button>
 
                 </form>

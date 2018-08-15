@@ -16,19 +16,19 @@ class Edit extends Component {
     this.state = {
       reward: {}
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleExpiredChange = this.handleExpiredChange.bind(this);
   }
 
   componentDidMount() {
     axios.get('http://localhost:8080/mitraiscarrot/reward/managerreward/'+this.props.match.params.id)
       .then(res => {
-        this.setState({ reward: res.data });
         res.data.expiredDate = moment(res.data.expiredDate,'YYYY-MM-DD');
+        this.setState({ reward: res.data });
         console.log(this.state.reward);
       });
   }
 
-  handleChange(date) {
+  handleExpiredChange(date) {
     const state = this.state.reward
     state["expiredDate"] = date;
     this.setState({reward:state});
@@ -91,7 +91,7 @@ class Edit extends Component {
                 </div>
                 <div className="form-group">
                     <label for="expiredDate">Expired Date:</label>
-                    <DatePicker type="text" className="form-control" name="expiredDate" value={this.state.reward.expiredDate} selected={this.state.reward.expiredDate} onChange={this.handleChange} placeholder="Expired Date" />
+                    <DatePicker type="text" className="form-control" name="expiredDate" value={this.state.reward.expiredDate} selected={this.state.reward.expiredDate} onChange={this.handleExpiredChange} placeholder="Expired Date" />
                   </div>
                   <div className="form-group">
                     <label for="maxClaim">Maximal Claim:</label>

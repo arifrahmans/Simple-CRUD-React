@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavCarrot';
 import NavDesign from './components/others/Header';
-import Jumbotron from './components/Jumbotron';
 import FooterDesign from './components/others/Footer';
 import RoleDesign from './components/others/Role';
 import MainDesign from './components/others/Main';
-import axios from 'axios';
+import Jumbotron from './components/others/Jumbotron';
 
 class App extends Component {
   
@@ -19,6 +17,7 @@ class App extends Component {
         <div>
           <NavDesign />
           <MainDesign />
+          <Jumbotron />
           <RoleDesign />
           <FooterDesign />
         </div>

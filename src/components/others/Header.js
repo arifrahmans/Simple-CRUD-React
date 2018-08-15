@@ -5,7 +5,7 @@ const Header = () => {
     return(
         <header>
         <nav className="navbar navbar-expand-md navbar-light fixed-top bg-light">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="/">
           <img src={MitraisLogo} alt="" />
         </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

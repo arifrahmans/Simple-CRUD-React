@@ -6,6 +6,7 @@ import FooterDesign from '../others/Footer';
 import MainDesign from '../others/Main';
 import MainReward from './template/Main';
 import CreateReward from './Create';
+import moment from 'moment';
 
 class List extends Component {
   
@@ -13,6 +14,10 @@ class List extends Component {
     super(props);
     this.state = {
       rewards : [],
+      sort: {
+        column: "id",
+        direction: 'asc',
+      }
     };
   }
 
@@ -34,6 +39,56 @@ class List extends Component {
     }
   }
 
+  onSort = (column) => (e) => {
+    const direction = this.state.sort.column ? (this.state.sort.direction === 'asc' ? 'desc' : 'asc') : 'desc';
+    const sortedData = this.state.rewards.sort((a, b) => {
+      if (column === 'typeName') {
+        return a.typeName > b.typeName;
+      } else if(column === 'expiredDate'){
+        let date1 = new Date(a.expiredDate);
+        let date2 = new Date(b.expiredDate);
+
+        return a.date1 > b.date2;
+      } else if(column === 'id'){
+        return a.id > b.id;
+      } else if(column === 'maxClaim'){
+        return a.maxClaim > b.maxClaim;
+      } else if(column === 'carrot'){
+        return a.carrot > b.carrot;
+      } else if(column === 'status'){
+        return a.status > b.status;
+      } else {
+        return a.transactions.length < b.transactions.length;
+      }
+    });
+      
+    if (direction === 'desc') {
+      sortedData.reverse();
+    }
+    
+    this.setState({
+      rewards: sortedData,
+      sort: {
+        column,
+        direction,
+      }
+    });
+  };
+
+  setArrow = (column) => {
+    let className = 'sort-direction';
+    
+    if (this.state.sort.column === column) {
+      className += this.state.sort.direction === 'asc' ? ' asc' : ' desc';
+    }
+    
+    console.log(className);
+    
+    return className;
+  };
+
+
+
   render() {
     return (
       <div>
@@ -52,13 +107,14 @@ class List extends Component {
                 <table className="table table-bordered mt-3">
                   <thead>
                     <tr>
-                      <th>Id</th>
-                      <th>Type Name</th>
-                      <th>Carrot Count</th>
-                      <th>Status</th>
+                      <th onClick={this.onSort('id')}>Id <span className={this.setArrow('id')}></span></th>
+                      <th onClick={this.onSort('typeName')}>Type Name <span className={this.setArrow('typeName')}></span></th>
+                      <th onClick={this.onSort('carrot')}>Carrot Count <span className={this.setArrow('carrot')}></span></th>
+                      <th onClick={this.onSort('status')}>Status <span className={this.setArrow('status')}></span></th>
                       <th>Closed Reason</th>
-                      <th>Maximal Claim</th>
-                      <th>Expired Date</th>
+                      <th onClick={this.onSort('maxClaim')}>Maximal Claim <span className={this.setArrow('maxClaim')}></span></th>
+                      <th  onClick={this.onSort('expiredDate')}>Expired Date <span className={this.setArrow('expiredDate')}></span></th>
+                      <th onClick={this.onSort('mostUsed')}>Most Used <span className={this.setArrow('mostUsed')}></span></th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -72,7 +128,8 @@ class List extends Component {
                         <td>{t.status}</td>
                         <td>{t.statusCloseReason}</td>
                         <td>{t.maxClaim}</td>
-                        <td>{t.expiredDate}</td>
+                        <td>{moment(t.expiredDate).format('YYYY-MM-DD')}</td>
+                        <td>{t.transactions.length}</td>
                         <td><Link to={`/managerreward/show/${t.id}`} className="btn btn-warning">Detail</Link>
                         
                           {t.status === "Active" ?  <Link to={`/managerreward/inactive/${t.id}`} className="btn btn-danger">Inactive </Link> : <button onClick={this.activate.bind(this, t.id)} className="btn btn-info">Activate</button>}
