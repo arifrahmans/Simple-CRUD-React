@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import '../node_modules/bootswatch/dist/pulse/bootstrap.min.css';
-import './components/themes/Custom.css';
 import App from './App';
 import './App.css';
 import ManagerRewardList from './components/manager/List';
